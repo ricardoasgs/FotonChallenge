@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView
+} from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 class Detail extends Component {
@@ -35,17 +41,91 @@ class Detail extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Detail</Text>
+      <View style={styles.mainContainer}>
+        <View style={styles.infoContainer}>
+          <View style={styles.bookContainer}>
+            <View style={styles.book} />
+            <View style={styles.description}>
+              <Text>asbjkfdbajksbfajshf</Text>
+            </View>
+          </View>
+          <View style={styles.footerBookContainer}>
+            <View style={styles.pages}>
+              <Text>Pages</Text>
+            </View>
+            <View style={styles.options}>
+              <Text>Options</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.textContainer}>
+          <Text style={styles.text}>
+            Um paragrafo aqui falando sobre qualquer coisa inutil dessa vida
+            desgraçada nesse calor do inferno. Um paragrafo aqui falando sobre
+            qualquer coisa inutil dessa vida desgraçada nesse calor do inferno,
+            um paragrafo aqui falando sobre qualquer coisa inutil dessa vida
+            desgraçada nesse calor do inferno. Um paragrafo aqui falando sobre
+            qualquer coisa inutil dessa vida desgraçada nesse calor do inferno.
+          </Text>
+          <Text style={styles.text}>
+            Um paragrafo aqui falando sobre qualquer coisa inutil, Um paragrafo
+            aqui falando sobre qualquer coisa inutil dessa vida desgraçada nesse
+            calor do inferno, Um paragrafo aqui falando sobre qualquer coisa
+            inutil dessa vida desgraçada nesse calor do inferno
+          </Text>
+        </View>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  mainContainer: {
+    flex: 1
+  },
+  infoContainer: {
+    flex: 4,
+    flexDirection: "column",
     backgroundColor: "#FFE207"
+  },
+  bookContainer: {
+    flex: 3,
+    flexDirection: "row"
+  },
+  book: {
+    flex: 1,
+    marginLeft: 10,
+    marginTop: 15,
+    backgroundColor: "black"
+  },
+  description: {
+    flex: 2,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  footerBookContainer: {
+    flex: 1,
+    flexDirection: "row"
+  },
+  pages: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  options: {
+    flex: 2,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  textContainer: {
+    flex: 5,
+    backgroundColor: "#FFF"
+  },
+  text: {
+    marginTop: 30,
+    marginLeft: 10,
+    marginBottom: 10,
+    fontSize: 20
   }
 });
 export default Detail;

@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  FlatList,
+  ScrollView
+} from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 class List extends Component {
@@ -35,17 +42,43 @@ class List extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text>List</Text>
-      </View>
+      <ScrollView style={styles.mainContainer}>
+        <View style={styles.bookContainer}>
+          <View style={styles.bookCard} />
+          <View style={styles.bookCard} />
+          <View style={styles.bookCard} />
+          <View style={styles.bookCard} />
+          <View style={styles.bookCard} />
+          <View style={styles.bookCard} />
+          <View style={styles.bookCard} />
+          <View style={styles.bookCard} />
+          <View style={styles.bookCard} />
+          <View style={styles.bookCard} />
+          <View style={styles.bookCard} />
+          <View style={styles.bookCard} />
+        </View>
+      </ScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  mainContainer: {
     flex: 1,
     backgroundColor: "#FFE207"
+  },
+  bookContainer: {
+    flex: 1,
+    flexDirection: "row",
+    flexWrap: "wrap"
+  },
+  bookCard: {
+    width: 110,
+    height: 145,
+    marginLeft: 20,
+    marginTop: 15,
+    marginBottom: 18,
+    backgroundColor: "black"
   }
 });
 export default List;

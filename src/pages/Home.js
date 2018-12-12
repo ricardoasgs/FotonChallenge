@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 class Home extends Component {
-  static navigationOptions = (navigation, name) => ({
+  static navigationOptions = ({ navigation }) => ({
     headerTitle: (
       <View
         style={{
@@ -19,7 +19,7 @@ class Home extends Component {
           </TouchableOpacity>
         </View>
 
-        <Text style={{ fontSize: 20 }}>{name}</Text>
+        <Text style={{ fontSize: 20 }}>Design Books</Text>
 
         <View style={{ marginRight: 15 }}>
           <TouchableOpacity onPress={() => console.log("This is a button!")}>
@@ -35,7 +35,7 @@ class Home extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.mainContainer}>
         <Text>Home</Text>
       </View>
     );
@@ -43,7 +43,7 @@ class Home extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  mainContainer: {
     flex: 1,
     backgroundColor: "#FFE207"
   }
