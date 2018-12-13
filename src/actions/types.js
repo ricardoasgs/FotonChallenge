@@ -1,0 +1,3 @@
+export const FETCHING_BOOKS = "FETCHING_BOOKS";
+export const FETCHED_BOOKS = "FETCHED_BOOKS";
+export const SELECTED_BOOK = "SELECTED_BOOK";

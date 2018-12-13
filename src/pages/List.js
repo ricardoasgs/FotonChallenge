@@ -1,13 +1,17 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
-  FlatList,
-  ScrollView
+  FlatList
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+
+import Book from "../components/Book";
+
+import { fetchBooks } from "../actions/bookActions";
 
 class List extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -40,24 +44,38 @@ class List extends Component {
     }
   });
 
+  state = {
+    filter: null,
+    index: 0
+  };
+
+  loadMore = () => {
+    const { index, filter } = this.state;
+    const newIndex = index + 15;
+    this.setState({ index: newIndex });
+    if (newIndex <= this.props.maxBooks)
+      this.props.dispatch(fetchBooks(filter, newIndex));
+  };
+
+  componentDidMount() {
+    const { filter, index } = this.state;
+    this.props.dispatch(fetchBooks(filter, index));
+  }
+
   render() {
+    const { books } = this.props;
     return (
-      <ScrollView style={styles.mainContainer}>
-        <View style={styles.bookContainer}>
-          <View style={styles.bookCard} />
-          <View style={styles.bookCard} />
-          <View style={styles.bookCard} />
-          <View style={styles.bookCard} />
-          <View style={styles.bookCard} />
-          <View style={styles.bookCard} />
-          <View style={styles.bookCard} />
-          <View style={styles.bookCard} />
-          <View style={styles.bookCard} />
-          <View style={styles.bookCard} />
-          <View style={styles.bookCard} />
-          <View style={styles.bookCard} />
-        </View>
-      </ScrollView>
+      <View style={styles.mainContainer}>
+        <FlatList
+          horizontal={false}
+          numColumns={3}
+          data={books}
+          keyExtractor={book => book.id}
+          renderItem={book => <Book book={book} />}
+          onEndReached={this.loadMore}
+          onEndReachedThreshold={0.4}
+        />
+      </View>
     );
   }
 }
@@ -65,20 +83,14 @@ class List extends Component {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: "#FFE207"
-  },
-  bookContainer: {
-    flex: 1,
-    flexDirection: "row",
+    backgroundColor: "#FFE207",
     flexWrap: "wrap"
-  },
-  bookCard: {
-    width: 110,
-    height: 145,
-    marginLeft: 20,
-    marginTop: 15,
-    marginBottom: 18,
-    backgroundColor: "black"
   }
 });
-export default List;
+
+const mapStateToProps = state => ({
+  books: state.bookReducer.books,
+  maxBooks: state.bookReducer.maxBooks
+});
+
+export default connect(mapStateToProps)(List);
