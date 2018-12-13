@@ -14,7 +14,10 @@ class BookDetails extends Component {
               Logo Design Love: A Guide to Creating Iconic Brand Identities
             </Text>
             <Text style={styles.descriptionAuthor}>by David Airey</Text>
-            <Text style={styles.descriptionTitle}>$9.99</Text>
+            <View style={styles.containerPrice}>
+              <Text style={styles.descriptionTitle}>$9.99</Text>
+              <Text style={styles.descriptionTitle}>***</Text>
+            </View>
           </View>
         </View>
         <View style={styles.footerBookContainer}>
@@ -45,7 +48,7 @@ const styles = StyleSheet.create({
     flex: 4,
     flexDirection: "column",
     backgroundColor: "#FFE207",
-    paddingBottom: 10
+    padding: 15
   },
   bookContainer: {
     flex: 3,
@@ -53,15 +56,16 @@ const styles = StyleSheet.create({
   },
   book: {
     flex: 1,
-    marginLeft: 10,
-    marginTop: 15,
-    backgroundColor: "black"
+    backgroundColor: "white",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 1
   },
   description: {
     flex: 2,
-    justifyContent: "flex-start",
-    marginLeft: 20,
-    marginTop: 15
+    marginLeft: 20
   },
   descriptionTitle: {
     fontSize: 24,
@@ -69,8 +73,18 @@ const styles = StyleSheet.create({
   },
   descriptionAuthor: {
     fontSize: 16,
-    color: "#CDB308",
-    marginBottom: 15
+    color: "#CDB308"
+  },
+  containerPrice: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between"
+  },
+  descriptionPrice: {
+    flex: 1,
+    fontSize: 24,
+    fontWeight: "bold"
   },
   footerBookContainer: {
     flex: 1,
@@ -89,12 +103,11 @@ const styles = StyleSheet.create({
     flex: 2,
     justifyContent: "flex-end",
     alignItems: "center",
-    flexDirection: "row",
-    marginRight: 10
+    flexDirection: "row"
   },
   buyButton: {
     marginRight: 10,
-    width: 150,
+    width: 130,
     height: 40,
     borderRadius: 50,
     backgroundColor: "#549AE6",
@@ -107,7 +120,6 @@ const styles = StyleSheet.create({
     color: "#FFF"
   },
   heartButton: {
-    marginRight: 10,
     width: 40,
     height: 40,
     borderRadius: 80,

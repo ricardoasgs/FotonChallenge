@@ -12,8 +12,7 @@ class BookText extends Component {
             desgraçada nesse calor do inferno. Um paragrafo aqui falando sobre
             qualquer coisa inutil dessa vida desgraçada nesse calor do inferno,
             um paragrafo aqui falando sobre qualquer coisa inutil dessa vida
-            desgraçada nesse calor do inferno. Um paragrafo aqui falando sobre
-            qualquer coisa inutil dessa vida desgraçada nesse calor do inferno.
+            desgraçada nesse calor do inferno.
           </Text>
           <Text style={styles.text}>
             Um paragrafo aqui falando sobre qualquer coisa inutil, Um paragrafo
@@ -35,10 +34,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF"
   },
   text: {
-    marginTop: 30,
-    marginLeft: 10,
+    marginTop: 25,
+    marginLeft: 15,
     marginBottom: 10,
-    fontSize: 20
+    fontSize: 15,
+    lineHeight: 32,
+    color: "#757B81"
   }
 });
 export default BookText;
