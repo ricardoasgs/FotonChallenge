@@ -71,7 +71,9 @@ class List extends Component {
           numColumns={3}
           data={books}
           keyExtractor={book => book.id}
-          renderItem={book => <Book book={book} />}
+          renderItem={book => (
+            <Book book={book} navigation={this.props.navigation} />
+          )}
           onEndReached={this.loadMore}
           onEndReachedThreshold={0.4}
         />

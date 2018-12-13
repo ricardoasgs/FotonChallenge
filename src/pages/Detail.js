@@ -16,7 +16,7 @@ class Detail extends Component {
         }}
       >
         <View style={{ marginLeft: 15 }}>
-          <TouchableOpacity onPress={() => navigation.openDrawer()}>
+          <TouchableOpacity onPress={() => navigation.pop()}>
             <Icon name="bars" size={27} />
           </TouchableOpacity>
         </View>

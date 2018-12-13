@@ -1,15 +1,34 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Image } from "react-native";
+import { connect } from "react-redux";
+import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
+
+import { selectBook } from "../actions/bookActions";
 
 class Book extends Component {
-  render() {
-    const imageUrl = this.props.book.item.volumeInfo.imageLinks
+  getUrl = () => {
+    return this.props.book.item.volumeInfo.imageLinks
       ? this.props.book.item.volumeInfo.imageLinks.smallThumbnail
       : null;
+  };
+
+  getDetails = () => {
+    this.props.dispatch(
+      selectBook(this.props.book, () =>
+        this.props.navigation.navigate("Detail")
+      )
+    );
+  };
+
+  render() {
     return (
-      <View style={styles.bookCard}>
-        <Image source={{ uri: imageUrl }} style={styles.backgroundImage} />
-      </View>
+      <TouchableOpacity onPress={() => this.getDetails()}>
+        <View style={styles.bookCard}>
+          <Image
+            source={{ uri: this.getUrl() }}
+            style={styles.backgroundImage}
+          />
+        </View>
+      </TouchableOpacity>
     );
   }
 }
@@ -31,4 +50,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Book;
+export default connect(null)(Book);
