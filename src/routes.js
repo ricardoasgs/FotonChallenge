@@ -7,56 +7,35 @@ import {
 import Home from "./pages/Home";
 import List from "./pages/List";
 import Detail from "./pages/Detail";
+import Buy from "./pages/Buy";
 
 const HomeScreen = createStackNavigator(
   {
     Home
   },
   {
-    navigationOptions: ({ navigation }) => ({
-      defaultNavigationOptions: {
-        title: "Welcome"
-      },
-      initialRouteName: " Home ",
-      headerMode: " screen ",
-      headerTitle: " Home ",
+    navigationOptions: {
       drawerLabel: " Home "
-    })
+    }
   }
 );
 
 const ListScreen = createStackNavigator(
   {
-    List
+    List,
+    Detail,
+    Buy
   },
   {
-    navigationOptions: ({ navigation }) => ({
-      initialRouteName: " List ",
-      headerMode: " screen ",
-      headerTitle: " List ",
+    navigationOptions: {
       drawerLabel: " List "
-    })
-  }
-);
-
-const DetailScreen = createStackNavigator(
-  {
-    Detail
-  },
-  {
-    navigationOptions: ({ navigation }) => ({
-      initialRouteName: " Detail ",
-      headerMode: " screen ",
-      headerTitle: " Detail ",
-      drawerLabel: " Detail "
-    })
+    }
   }
 );
 
 const MyDrawerNavigator = createDrawerNavigator({
   HomeScreen,
-  ListScreen,
-  DetailScreen
+  ListScreen
 });
 
 const Routes = createAppContainer(MyDrawerNavigator);

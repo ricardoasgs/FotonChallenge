@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { connect } from "react-redux";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
@@ -128,4 +128,9 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   }
 });
-export default BookDetails;
+
+const mapStateToProps = state => ({
+  book: state.bookReducer.book
+});
+
+export default connect(mapStateToProps)(BookDetails);

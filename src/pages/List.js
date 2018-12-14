@@ -15,6 +15,9 @@ import { fetchBooks } from "../actions/bookActions";
 
 class List extends Component {
   static navigationOptions = ({ navigation }) => ({
+    headerStyle: {
+      backgroundColor: "#FFE207"
+    },
     headerTitle: (
       <View
         style={{
@@ -26,7 +29,7 @@ class List extends Component {
       >
         <View style={{ marginLeft: 15 }}>
           <TouchableOpacity onPress={() => navigation.openDrawer()}>
-            <Icon name="bars" size={27} />
+            <Icon name="bars" size={24} />
           </TouchableOpacity>
         </View>
 
@@ -34,14 +37,11 @@ class List extends Component {
 
         <View style={{ marginRight: 15 }}>
           <TouchableOpacity onPress={() => console.log("This is a button!")}>
-            <Icon name="search" size={27} />
+            <Icon name="search" size={24} />
           </TouchableOpacity>
         </View>
       </View>
-    ),
-    headerStyle: {
-      backgroundColor: "#FFE207"
-    }
+    )
   });
 
   state = {

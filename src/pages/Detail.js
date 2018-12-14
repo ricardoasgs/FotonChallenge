@@ -6,33 +6,28 @@ import BookText from "../components/BookText";
 
 class Detail extends Component {
   static navigationOptions = ({ navigation }) => ({
+    headerStyle: {
+      backgroundColor: "#FFE207"
+    },
     headerTitle: (
       <View
         style={{
           flex: 1,
           flexDirection: "row",
-          justifyContent: "space-between",
+          justifyContent: "center",
           alignItems: "center"
         }}
       >
-        <View style={{ marginLeft: 15 }}>
-          <TouchableOpacity onPress={() => navigation.pop()}>
-            <Icon name="bars" size={27} />
-          </TouchableOpacity>
-        </View>
-
         <Text style={{ fontSize: 20 }}>Detail</Text>
-
-        <View style={{ marginRight: 15 }}>
-          <TouchableOpacity onPress={() => console.log("This is a button!")}>
-            <Icon name="search" size={27} />
-          </TouchableOpacity>
-        </View>
       </View>
     ),
-    headerStyle: {
-      backgroundColor: "#FFE207"
-    }
+    headerRight: (
+      <View style={{ marginRight: 15 }}>
+        <TouchableOpacity onPress={() => console.log("This is a button!")}>
+          <Icon name="search" size={24} />
+        </TouchableOpacity>
+      </View>
+    )
   });
 
   render() {
