@@ -6,8 +6,9 @@ import { selectBook } from "../actions/bookActions";
 
 class Book extends Component {
   getUrl = () => {
-    return this.props.book.item.volumeInfo.imageLinks
-      ? this.props.book.item.volumeInfo.imageLinks.smallThumbnail
+    const book = this.props.book.item;
+    return book.volumeInfo.imageLinks
+      ? book.volumeInfo.imageLinks.smallThumbnail
       : null;
   };
 

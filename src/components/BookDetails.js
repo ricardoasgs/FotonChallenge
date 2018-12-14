@@ -1,33 +1,62 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 class BookDetails extends Component {
+  getUrl = () => {
+    const book = this.props.book.item;
+    return book.volumeInfo.imageLinks
+      ? book.volumeInfo.imageLinks.smallThumbnail
+      : null;
+  };
+
   render() {
+    const book = this.props.book.item;
+    console.log(book);
     return (
       <View style={styles.infoContainer}>
         <View style={styles.bookContainer}>
-          <View style={styles.book} />
+          <View style={styles.book}>
+            <Image
+              source={{ uri: this.getUrl() }}
+              style={styles.backgroundImage}
+            />
+          </View>
           <View style={styles.description}>
-            <Text style={styles.descriptionTitle}>
-              Logo Design Love: A Guide to Creating Iconic Brand Identities
-            </Text>
-            <Text style={styles.descriptionAuthor}>by David Airey</Text>
+            <Text style={styles.descriptionTitle}>{book.volumeInfo.title}</Text>
+            {book.volumeInfo.authors.length === 1 ? (
+              <Text style={styles.descriptionAuthor}>
+                by {book.volumeInfo.authors}
+              </Text>
+            ) : (
+              <Text style={styles.descriptionAuthor}>Mais de um author</Text>
+            )}
             <View style={styles.containerPrice}>
-              <Text style={styles.descriptionTitle}>$9.99</Text>
+              {book.saleInfo.saleability === "FOR_SALE" ? (
+                <Text style={styles.descriptionTitle}>
+                  {book.saleInfo.retailPrice.currencyCode}{" "}
+                  {book.saleInfo.retailPrice.amount}
+                </Text>
+              ) : (
+                <Text style={styles.descriptionTitle}>Not for Sale</Text>
+              )}
               <Text style={styles.descriptionTitle}>***</Text>
             </View>
           </View>
         </View>
         <View style={styles.footerBookContainer}>
           <View style={styles.pages}>
-            <Text style={styles.pageText}>216 Pages</Text>
+            <Text style={styles.pageText}>
+              {book.volumeInfo.pageCount} Pages
+            </Text>
           </View>
           <View style={styles.options}>
             <TouchableOpacity
               style={styles.buyButton}
-              onPress={() => console.log("Clicked")}
+              onPress={() => {
+                this.props.navigation.navigate("Buy");
+              }}
             >
               <Text style={styles.buyText}>BUY</Text>
             </TouchableOpacity>
@@ -78,12 +107,12 @@ const styles = StyleSheet.create({
   containerPrice: {
     flex: 1,
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-end",
     justifyContent: "space-between"
   },
   descriptionPrice: {
     flex: 1,
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: "bold"
   },
   footerBookContainer: {
@@ -126,6 +155,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#E05568",
     alignItems: "center",
     justifyContent: "center"
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: "cover"
   }
 });
 

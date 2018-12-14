@@ -1,25 +1,15 @@
 import React, { Component } from "react";
-
+import { connect } from "react-redux";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 
 class BookText extends Component {
   render() {
+    const book = this.props.book.item;
+    // console.log(book.volumeInfo);
     return (
       <View style={styles.textContainer}>
         <ScrollView style={styles.scrollContainer}>
-          <Text style={styles.text}>
-            Um paragrafo aqui falando sobre qualquer coisa inutil dessa vida
-            desgraçada nesse calor do inferno. Um paragrafo aqui falando sobre
-            qualquer coisa inutil dessa vida desgraçada nesse calor do inferno,
-            um paragrafo aqui falando sobre qualquer coisa inutil dessa vida
-            desgraçada nesse calor do inferno.
-          </Text>
-          <Text style={styles.text}>
-            Um paragrafo aqui falando sobre qualquer coisa inutil, Um paragrafo
-            aqui falando sobre qualquer coisa inutil dessa vida desgraçada nesse
-            calor do inferno, Um paragrafo aqui falando sobre qualquer coisa
-            inutil dessa vida desgraçada nesse calor do inferno
-          </Text>
+          <Text style={styles.text}>{book.volumeInfo.description}</Text>
         </ScrollView>
       </View>
     );
@@ -42,4 +32,9 @@ const styles = StyleSheet.create({
     color: "#757B81"
   }
 });
-export default BookText;
+
+const mapStateToProps = state => ({
+  book: state.bookReducer.book
+});
+
+export default connect(mapStateToProps)(BookText);

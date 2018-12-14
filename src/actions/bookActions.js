@@ -20,7 +20,6 @@ export async function fetchBooks(filter = "Programação", index = 0) {
 }
 
 export function selectBook(book, callback) {
-  console.log("teste");
   return dispatch => {
     dispatch({
       type: SELECTED_BOOK,

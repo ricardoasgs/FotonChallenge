@@ -33,7 +33,7 @@ class Detail extends Component {
   render() {
     return (
       <View style={styles.mainContainer}>
-        <BookDetails />
+        <BookDetails navigation={this.props.navigation} />
         <BookText />
       </View>
     );
