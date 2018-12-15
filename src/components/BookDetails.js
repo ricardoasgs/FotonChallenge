@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     padding: 15
   },
   bookContainer: {
-    flex: 3,
+    flex: 5,
     flexDirection: "row"
   },
   book: {
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   footerBookContainer: {
-    flex: 1,
+    flex: 2,
     flexDirection: "row"
   },
   pages: {

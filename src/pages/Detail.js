@@ -23,9 +23,9 @@ class Detail extends Component {
     ),
     headerRight: (
       <View style={{ marginRight: 15 }}>
-        <TouchableOpacity onPress={() => console.log("This is a button!")}>
-          <Icon name="search" size={24} />
-        </TouchableOpacity>
+        {/* <TouchableOpacity onPress={() => console.log("This is a button!")}>
+        <Icon name="search" size={24} />
+      </TouchableOpacity> */}
       </View>
     )
   });

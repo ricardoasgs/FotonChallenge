@@ -1,10 +1,16 @@
-import { FETCHING_BOOKS, FETCHED_BOOKS, SELECTED_BOOK } from "../actions/types";
+import {
+  FETCHING_BOOKS,
+  FETCHED_BOOKS,
+  SELECTED_BOOK,
+  CHANGED_FILTER
+} from "../actions/types";
 
 const INITIAL_STATE = {
   book: {},
   books: [],
   maxBooks: 0,
-  loading: false
+  loading: false,
+  filter: "Programação"
 };
 
 export default function(state = INITIAL_STATE, action) {
@@ -20,6 +26,8 @@ export default function(state = INITIAL_STATE, action) {
       };
     case SELECTED_BOOK:
       return { ...state, book: action.payload };
+    case CHANGED_FILTER:
+      return { ...state, filter: action.payload };
     default:
       return state;
   }

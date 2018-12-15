@@ -1,6 +1,11 @@
 import axios from "axios";
 
-import { FETCHING_BOOKS, FETCHED_BOOKS, SELECTED_BOOK } from "./types";
+import {
+  FETCHING_BOOKS,
+  FETCHED_BOOKS,
+  SELECTED_BOOK,
+  CHANGED_FILTER
+} from "./types";
 
 export async function fetchBooks(filter = "Programação", index = 0) {
   return dispatch => {
@@ -24,6 +29,16 @@ export function selectBook(book, callback) {
     dispatch({
       type: SELECTED_BOOK,
       payload: book
+    });
+    callback();
+  };
+}
+
+export function schangeFilter(filter) {
+  return dispatch => {
+    dispatch({
+      type: CHANGED_FILTER,
+      payload: filter
     });
     callback();
   };

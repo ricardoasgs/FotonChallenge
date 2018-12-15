@@ -5,7 +5,8 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  FlatList
+  FlatList,
+  TextInput
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
@@ -14,6 +15,16 @@ import Book from "../components/Book";
 import { fetchBooks } from "../actions/bookActions";
 
 class List extends Component {
+  state = {
+    width: 0
+  };
+
+  componentDidMount() {
+    this.props.navigation.setParams({
+      width: 100
+    });
+  }
+
   static navigationOptions = ({ navigation }) => ({
     headerStyle: {
       backgroundColor: "#FFE207"
@@ -27,7 +38,11 @@ class List extends Component {
           alignItems: "center"
         }}
       >
-        <View style={{ marginLeft: 15 }}>
+        <View
+          style={{
+            marginLeft: 15
+          }}
+        >
           <TouchableOpacity onPress={() => navigation.openDrawer()}>
             <Icon name="bars" size={24} />
           </TouchableOpacity>
@@ -35,8 +50,20 @@ class List extends Component {
 
         <Text style={{ fontSize: 20 }}>List</Text>
 
-        <View style={{ marginRight: 15 }}>
-          <TouchableOpacity onPress={() => console.log("This is a button!")}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            marginRight: 15
+          }}
+        >
+          <TextInput
+            style={{ height: 40, width: 0 }}
+            value="Type here to translate!"
+            onChangeText={text => console.log(text)}
+          />
+
+          <TouchableOpacity onPress={() => this.setState({ width: 100 })}>
             <Icon name="search" size={24} />
           </TouchableOpacity>
         </View>
@@ -45,12 +72,12 @@ class List extends Component {
   });
 
   state = {
-    filter: null,
     index: 0
   };
 
   loadMore = () => {
-    const { index, filter } = this.state;
+    const { index } = this.state;
+    const { filter } = this.props;
     const newIndex = index + 15;
     this.setState({ index: newIndex });
     if (newIndex <= this.props.maxBooks)
@@ -92,7 +119,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({
   books: state.bookReducer.books,
-  maxBooks: state.bookReducer.maxBooks
+  maxBooks: state.bookReducer.maxBooks,
+  filter: state.bookReducer.filter
 });
 
 export default connect(mapStateToProps)(List);

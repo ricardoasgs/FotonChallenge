@@ -12,23 +12,35 @@ class Home extends Component {
         style={{
           flex: 1,
           flexDirection: "row",
-          justifyContent: "space-between",
+          justifyContent: "flex-start",
           alignItems: "center"
         }}
       >
-        <View style={{ marginLeft: 15 }}>
+        <View
+          style={{
+            flex: 1,
+            flexDirection: "row",
+            marginLeft: 15
+          }}
+        >
           <TouchableOpacity onPress={() => navigation.openDrawer()}>
             <Icon name="bars" size={24} />
           </TouchableOpacity>
         </View>
+        <View
+          style={{
+            flex: 2,
+            flexDirection: "row"
+          }}
+        >
+          <Text style={{ fontSize: 20 }}>Design Books</Text>
+        </View>
 
-        <Text style={{ fontSize: 20 }}>Design Books</Text>
-
-        <View style={{ marginRight: 15 }}>
+        {/* <View style={{ marginRight: 15 }}>
           <TouchableOpacity onPress={() => console.log("This is a button!")}>
             <Icon name="search" size={24} />
           </TouchableOpacity>
-        </View>
+        </View> */}
       </View>
     )
   });
