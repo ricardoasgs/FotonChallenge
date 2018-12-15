@@ -35,12 +35,6 @@ class Home extends Component {
         >
           <Text style={{ fontSize: 20 }}>Design Books</Text>
         </View>
-
-        {/* <View style={{ marginRight: 15 }}>
-          <TouchableOpacity onPress={() => console.log("This is a button!")}>
-            <Icon name="search" size={24} />
-          </TouchableOpacity>
-        </View> */}
       </View>
     )
   });
@@ -48,7 +42,12 @@ class Home extends Component {
   render() {
     return (
       <View style={styles.mainContainer}>
-        <Text>Home</Text>
+        <View style={styles.iconContainer}>
+          <Icon name="book" size={250} />
+        </View>
+        <Text style={styles.welcomeMessage}>
+          Welcome to Awesome Library App!
+        </Text>
       </View>
     );
   }
@@ -57,7 +56,18 @@ class Home extends Component {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: "#FFE207"
+    backgroundColor: "#FFE207",
+    flexDirection: "column",
+    alignItems: "center"
+  },
+  welcomeMessage: {
+    flex: 2,
+    fontSize: 22,
+    fontWeight: "bold"
+  },
+  iconContainer: {
+    flex: 3,
+    justifyContent: "flex-end"
   }
 });
 

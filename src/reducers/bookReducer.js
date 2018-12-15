@@ -1,6 +1,7 @@
 import {
   FETCHING_BOOKS,
-  FETCHED_BOOKS,
+  SUCCESS_FETCHED_BOOKS,
+  FAILURE_FETCHED_BOOKS,
   SELECTED_BOOK,
   CHANGED_FILTER
 } from "../actions/types";
@@ -10,6 +11,7 @@ const INITIAL_STATE = {
   books: [],
   maxBooks: 0,
   loading: false,
+  error: false,
   filter: "Programação"
 };
 
@@ -17,12 +19,18 @@ export default function(state = INITIAL_STATE, action) {
   switch (action.type) {
     case FETCHING_BOOKS:
       return { ...state, loading: true };
-    case FETCHED_BOOKS:
+    case SUCCESS_FETCHED_BOOKS:
       return {
         ...state,
         books: state.books.concat(action.payload.items),
         loading: false,
         maxBooks: action.payload.totalItems
+      };
+    case FAILURE_FETCHED_BOOKS:
+      return {
+        ...state,
+        loading: false,
+        error: true
       };
     case SELECTED_BOOK:
       return { ...state, book: action.payload };

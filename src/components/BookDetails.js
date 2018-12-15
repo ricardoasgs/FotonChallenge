@@ -2,8 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import StarRating from "react-native-rating-star";
 
 class BookDetails extends Component {
+  state = {
+    rating: 3
+  };
+
   getUrl = () => {
     const book = this.props.book.item;
     return book.volumeInfo.imageLinks
@@ -11,8 +16,42 @@ class BookDetails extends Component {
       : null;
   };
 
+  renderAuthors = () => {
+    const authors = this.props.book.item.volumeInfo.authors;
+    if (!authors) {
+      return <Text style={styles.descriptionAuthor}>By an unknown author</Text>;
+    } else {
+      if (authors.length === 1) {
+        return <Text style={styles.descriptionAuthor}>By {authors}</Text>;
+      } else {
+        return authors.map((author, index) => (
+          <Text key={index} style={styles.descriptionAuthor}>
+            By {author}
+          </Text>
+        ));
+      }
+    }
+  };
+
+  renderCost = () => {
+    const book = this.props.book.item;
+    if (book.saleInfo.saleability === "FOR_SALE") {
+      return;
+      <Text style={styles.descriptionTitle}>
+        {book.saleInfo.retailPrice.currencyCode}{" "}
+        {book.saleInfo.retailPrice.amount}
+      </Text>;
+    } else {
+      return <Text style={styles.descriptionPrice}>Not for Sale</Text>;
+    }
+  };
+
+  onStarClick = (nextValue, prevValue, name) =>
+    this.setState({ rating: nextValue });
+
   render() {
     const book = this.props.book.item;
+    const { rating } = this.state;
     console.log(book);
     return (
       <View style={styles.infoContainer}>
@@ -25,23 +64,15 @@ class BookDetails extends Component {
           </View>
           <View style={styles.description}>
             <Text style={styles.descriptionTitle}>{book.volumeInfo.title}</Text>
-            {book.volumeInfo.authors.length === 1 ? (
-              <Text style={styles.descriptionAuthor}>
-                by {book.volumeInfo.authors}
-              </Text>
-            ) : (
-              <Text style={styles.descriptionAuthor}>Mais de um author</Text>
-            )}
+            {this.renderAuthors()}
             <View style={styles.containerPrice}>
-              {book.saleInfo.saleability === "FOR_SALE" ? (
-                <Text style={styles.descriptionTitle}>
-                  {book.saleInfo.retailPrice.currencyCode}{" "}
-                  {book.saleInfo.retailPrice.amount}
-                </Text>
-              ) : (
-                <Text style={styles.descriptionTitle}>Not for Sale</Text>
-              )}
-              <Text style={styles.descriptionTitle}>***</Text>
+              {this.renderCost()}
+              <StarRating
+                maxStars={5}
+                rating={1}
+                selectStar={require("./select_star.png")}
+                unSelectStar={require("./unselect_star.png")}
+              />
             </View>
           </View>
         </View>
@@ -97,7 +128,7 @@ const styles = StyleSheet.create({
     marginLeft: 20
   },
   descriptionTitle: {
-    fontSize: 24,
+    fontSize: 23,
     fontWeight: "bold"
   },
   descriptionAuthor: {

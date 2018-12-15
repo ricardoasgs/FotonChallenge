@@ -33,10 +33,16 @@ const ListScreen = createStackNavigator(
   }
 );
 
-const MyDrawerNavigator = createDrawerNavigator({
-  HomeScreen,
-  ListScreen
-});
+const MyDrawerNavigator = createDrawerNavigator(
+  {
+    HomeScreen,
+    ListScreen
+  },
+  {
+    drawerBackgroundColor: "#FFE207",
+    drawerWidth: 250
+  }
+);
 
 const Routes = createAppContainer(MyDrawerNavigator);
 

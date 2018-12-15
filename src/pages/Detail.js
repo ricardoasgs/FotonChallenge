@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
 import BookDetails from "../components/BookDetails";
 import BookText from "../components/BookText";
 

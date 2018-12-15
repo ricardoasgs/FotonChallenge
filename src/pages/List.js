@@ -16,14 +16,9 @@ import { fetchBooks } from "../actions/bookActions";
 
 class List extends Component {
   state = {
+    index: 0,
     width: 0
   };
-
-  componentDidMount() {
-    this.props.navigation.setParams({
-      width: 100
-    });
-  }
 
   static navigationOptions = ({ navigation }) => ({
     headerStyle: {
@@ -63,7 +58,7 @@ class List extends Component {
             onChangeText={text => console.log(text)}
           />
 
-          <TouchableOpacity onPress={() => this.setState({ width: 100 })}>
+          <TouchableOpacity onPress={() => console.log("Clicked")}>
             <Icon name="search" size={24} />
           </TouchableOpacity>
         </View>
@@ -71,22 +66,17 @@ class List extends Component {
     )
   });
 
-  state = {
-    index: 0
-  };
-
   loadMore = () => {
     const { index } = this.state;
-    const { filter } = this.props;
     const newIndex = index + 15;
     this.setState({ index: newIndex });
     if (newIndex <= this.props.maxBooks)
-      this.props.dispatch(fetchBooks(filter, newIndex));
+      this.props.dispatch(fetchBooks(newIndex));
   };
 
   componentDidMount() {
-    const { filter, index } = this.state;
-    this.props.dispatch(fetchBooks(filter, index));
+    const { index } = this.state;
+    this.props.dispatch(fetchBooks());
   }
 
   render() {

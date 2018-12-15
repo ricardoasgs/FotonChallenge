@@ -1,9 +1,13 @@
 import { applyMiddleware, createStore } from "redux";
-import reduxThunk from "redux-thunk";
-import reduxPromise from "redux-promise";
+import createSagaMiddleware from "redux-saga";
 
 import reducers from "../reducers/index";
+import rootSaga from "../sagas/bookSaga";
 
-const middle = [reduxPromise, reduxThunk];
+const sagaMiddleware = createSagaMiddleware();
 
-export default applyMiddleware(...middle)(createStore)(reducers);
+const store = createStore(reducers, applyMiddleware(sagaMiddleware));
+
+sagaMiddleware.run(rootSaga);
+
+export default store;
