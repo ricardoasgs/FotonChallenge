@@ -2,13 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import StarRating from "react-native-rating-star";
+import { AirbnbRating } from "react-native-ratings";
 
 class BookDetails extends Component {
-  state = {
-    rating: 3
-  };
-
   getUrl = () => {
     const book = this.props.book.item;
     return book.volumeInfo.imageLinks
@@ -36,22 +32,19 @@ class BookDetails extends Component {
   renderCost = () => {
     const book = this.props.book.item;
     if (book.saleInfo.saleability === "FOR_SALE") {
-      return;
-      <Text style={styles.descriptionTitle}>
-        {book.saleInfo.retailPrice.currencyCode}{" "}
-        {book.saleInfo.retailPrice.amount}
-      </Text>;
+      return (
+        <Text style={styles.descriptionTitle}>
+          {book.saleInfo.retailPrice.currencyCode}{" "}
+          {book.saleInfo.retailPrice.amount}
+        </Text>
+      );
     } else {
       return <Text style={styles.descriptionPrice}>Not for Sale</Text>;
     }
   };
 
-  onStarClick = (nextValue, prevValue, name) =>
-    this.setState({ rating: nextValue });
-
   render() {
     const book = this.props.book.item;
-    const { rating } = this.state;
     console.log(book);
     return (
       <View style={styles.infoContainer}>
@@ -67,11 +60,11 @@ class BookDetails extends Component {
             {this.renderAuthors()}
             <View style={styles.containerPrice}>
               {this.renderCost()}
-              <StarRating
-                maxStars={5}
-                rating={1}
-                selectStar={require("./select_star.png")}
-                unSelectStar={require("./unselect_star.png")}
+              <AirbnbRating
+                count={5}
+                showRating={false}
+                defaultRating={3}
+                size={18}
               />
             </View>
           </View>
@@ -116,12 +109,7 @@ const styles = StyleSheet.create({
   },
   book: {
     flex: 1,
-    backgroundColor: "white",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-    elevation: 1
+    backgroundColor: "white"
   },
   description: {
     flex: 2,
@@ -148,7 +136,8 @@ const styles = StyleSheet.create({
   },
   footerBookContainer: {
     flex: 2,
-    flexDirection: "row"
+    flexDirection: "row",
+    marginTop: 10
   },
   pages: {
     flex: 1,

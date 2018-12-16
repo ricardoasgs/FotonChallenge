@@ -3,7 +3,8 @@ import {
   SUCCESS_FETCHED_BOOKS,
   FAILURE_FETCHED_BOOKS,
   SELECTED_BOOK,
-  CHANGED_FILTER
+  CHANGED_FILTER,
+  CLEANING_LIST
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -36,6 +37,8 @@ export default function(state = INITIAL_STATE, action) {
       return { ...state, book: action.payload };
     case CHANGED_FILTER:
       return { ...state, filter: action.payload };
+    case CLEANING_LIST:
+      return { ...state, books: [] };
     default:
       return state;
   }

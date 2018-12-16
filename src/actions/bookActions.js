@@ -1,4 +1,9 @@
-import { FETCHING_BOOKS, SELECTED_BOOK, CHANGED_FILTER } from "./types";
+import {
+  FETCHING_BOOKS,
+  SELECTED_BOOK,
+  CHANGED_FILTER,
+  CLEANING_LIST
+} from "./types";
 
 export function fetchBooks(index = 0) {
   return {
@@ -19,5 +24,11 @@ export function changeFilter(filter) {
   return {
     type: CHANGED_FILTER,
     payload: filter
+  };
+}
+
+export function clearBooks() {
+  return {
+    type: CLEANING_LIST
   };
 }

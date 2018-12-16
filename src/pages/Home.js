@@ -60,14 +60,14 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center"
   },
+  iconContainer: {
+    flex: 5,
+    justifyContent: "flex-end"
+  },
   welcomeMessage: {
-    flex: 2,
+    flex: 3,
     fontSize: 22,
     fontWeight: "bold"
-  },
-  iconContainer: {
-    flex: 3,
-    justifyContent: "flex-end"
   }
 });
 
