@@ -116,11 +116,11 @@ const styles = StyleSheet.create({
     marginLeft: 20
   },
   descriptionTitle: {
-    fontSize: 23,
+    fontSize: 21,
     fontWeight: "bold"
   },
   descriptionAuthor: {
-    fontSize: 16,
+    fontSize: 14,
     color: "#CDB308"
   },
   containerPrice: {

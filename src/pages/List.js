@@ -17,7 +17,7 @@ import { fetchBooks, changeFilter, clearBooks } from "../actions/bookActions";
 class List extends Component {
   state = {
     index: 0,
-    width: 0
+    search: false
   };
 
   static navigationOptions = ({ navigation }) => {
@@ -40,12 +40,30 @@ class List extends Component {
               marginLeft: 15
             }}
           >
-            <TouchableOpacity onPress={() => navigation.openDrawer()}>
-              <Icon name="bars" size={24} />
-            </TouchableOpacity>
+            {!params.search ? (
+              <TouchableOpacity onPress={() => navigation.openDrawer()}>
+                <Icon name="bars" size={24} />
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity onPress={() => params.hideSearch()}>
+                <Icon name="arrow-left" size={24} />
+              </TouchableOpacity>
+            )}
           </View>
-
-          <Text style={{ fontSize: 20 }}>List</Text>
+          {!params.search ? (
+            <Text style={{ fontSize: 20 }}>List</Text>
+          ) : (
+            <TextInput
+              style={{
+                height: 80,
+                marginLeft: 20,
+                fontSize: 18,
+                maxWidth: 230
+              }}
+              value={params.filter}
+              onChangeText={text => params.handleFilter(text)}
+            />
+          )}
 
           <View
             style={{
@@ -54,17 +72,7 @@ class List extends Component {
               marginRight: 15
             }}
           >
-            <TextInput
-              style={{
-                height: 80,
-                width: params.width,
-                marginLeft: 20
-              }}
-              value={params.filter}
-              onChangeText={text => params.handleFilter(text)}
-            />
-
-            <TouchableOpacity onPress={() => params.updateWidth()}>
+            <TouchableOpacity onPress={() => params.handleSearchInput()}>
               <Icon name="search" size={24} />
             </TouchableOpacity>
           </View>
@@ -72,13 +80,15 @@ class List extends Component {
       )
     };
   };
+
   componentDidMount() {
     this.props.dispatch(fetchBooks());
     this.props.navigation.setParams({
-      width: this.state.width,
-      updateWidth: this.updateWidth,
+      search: this.state.search,
       filter: this.props.filter,
-      handleFilter: this.handleFilter
+      handleFilter: this.handleFilter,
+      handleSearchInput: this.handleSearchInput,
+      hideSearch: this.hideSearch
     });
   }
 
@@ -90,23 +100,27 @@ class List extends Component {
       this.props.dispatch(fetchBooks(newIndex));
   };
 
-  updateWidth = () => {
-    let newValue;
-    if (this.state.width == 0) {
-      newValue = 130;
-    } else {
-      newValue = 0;
-      this.props.dispatch(clearBooks());
-      this.props.dispatch(fetchBooks());
-    }
-    this.setState({ width: newValue });
-    this.props.navigation.setParams({ width: newValue });
-  };
-
   handleFilter = filter => {
     this.props.navigation.setParams({ filter });
     this.props.dispatch(changeFilter(filter));
-    console.log(filter);
+  };
+
+  handleSearchInput = () => {
+    if (!this.state.search) {
+      this.props.navigation.setParams({ search: true });
+      this.setState({ search: true });
+    } else {
+      this.props.dispatch(clearBooks());
+      this.props.dispatch(fetchBooks());
+      this.hideSearch();
+    }
+  };
+
+  hideSearch = () => {
+    if (this.state.search) {
+      this.props.navigation.setParams({ search: false });
+      this.setState({ search: false });
+    }
   };
 
   render() {
