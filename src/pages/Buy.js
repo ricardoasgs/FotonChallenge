@@ -23,7 +23,6 @@ class Buy extends Component {
   });
 
   render() {
-    console.log(this.props.book);
     return (
       <WebView
         source={{ uri: this.props.book.item.accessInfo.webReaderLink }}

@@ -77,7 +77,12 @@ const styles = StyleSheet.create({
   },
   book: {
     flex: 1,
-    paddingVertical: 7
+    marginVertical: 7,
+    backgroundColor: "#FFE207",
+    elevation: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 2, height: 5 },
+    elevation: 20
   },
   description: {
     flex: 2,

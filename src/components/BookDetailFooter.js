@@ -57,6 +57,9 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 50,
     backgroundColor: "#549AE6",
+    shadowColor: "#000",
+    shadowOffset: { width: 2, height: 5 },
+    elevation: 10,
     alignItems: "center",
     justifyContent: "center"
   },
@@ -71,7 +74,10 @@ const styles = StyleSheet.create({
     borderRadius: 80,
     backgroundColor: "#E05568",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 2, height: 5 },
+    elevation: 10
   }
 });
 

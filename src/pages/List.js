@@ -42,7 +42,6 @@ class List extends Component {
 
   render() {
     const { books, refreshing } = this.props;
-    console.log(refreshing);
     return (
       <View style={styles.mainContainer}>
         <FlatList

@@ -8,7 +8,6 @@ import BookDetailContent from "./BookDetailContent";
 class BookDetails extends Component {
   render() {
     const book = this.props.book.item;
-    console.log(book);
     return (
       <View style={styles.infoContainer}>
         <BookDetailContent book={book} />
