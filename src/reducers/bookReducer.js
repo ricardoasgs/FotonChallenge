@@ -13,25 +13,28 @@ const INITIAL_STATE = {
   maxBooks: 0,
   loading: false,
   error: false,
+  refreshing: false,
   filter: "Programação"
 };
 
 export default function(state = INITIAL_STATE, action) {
   switch (action.type) {
     case FETCHING_BOOKS:
-      return { ...state, loading: true };
+      return { ...state, loading: true, refreshing: true };
     case SUCCESS_FETCHED_BOOKS:
       return {
         ...state,
         books: state.books.concat(action.payload.items),
         loading: false,
-        maxBooks: action.payload.totalItems
+        maxBooks: action.payload.totalItems,
+        refreshing: false
       };
     case FAILURE_FETCHED_BOOKS:
       return {
         ...state,
         loading: false,
-        error: true
+        error: true,
+        refreshing: false
       };
     case SELECTED_BOOK:
       return { ...state, book: action.payload };

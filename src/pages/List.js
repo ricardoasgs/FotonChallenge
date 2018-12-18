@@ -1,23 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  FlatList,
-  TextInput
-} from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
+import { View, StyleSheet, FlatList } from "react-native";
 
 import Book from "../components/Book";
 
-import { fetchBooks, changeFilter, clearBooks } from "../actions/bookActions";
+import { fetchBooks, clearBooks } from "../actions/bookActions";
+import ListHeaderTitle from "../components/ListHeaderTitle";
 
 class List extends Component {
   state = {
-    index: 0,
-    search: false
+    index: 0
   };
 
   static navigationOptions = ({ navigation }) => {
@@ -26,70 +18,12 @@ class List extends Component {
       headerStyle: {
         backgroundColor: "#FFE207"
       },
-      headerTitle: (
-        <View
-          style={{
-            flex: 1,
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center"
-          }}
-        >
-          <View
-            style={{
-              marginLeft: 15
-            }}
-          >
-            {!params.search ? (
-              <TouchableOpacity onPress={() => navigation.openDrawer()}>
-                <Icon name="bars" size={24} />
-              </TouchableOpacity>
-            ) : (
-              <TouchableOpacity onPress={() => params.hideSearch()}>
-                <Icon name="arrow-left" size={24} />
-              </TouchableOpacity>
-            )}
-          </View>
-          {!params.search ? (
-            <Text style={{ fontSize: 20 }}>List</Text>
-          ) : (
-            <TextInput
-              style={{
-                height: 80,
-                marginLeft: 20,
-                fontSize: 18,
-                maxWidth: 230
-              }}
-              value={params.filter}
-              onChangeText={text => params.handleFilter(text)}
-            />
-          )}
-
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginRight: 15
-            }}
-          >
-            <TouchableOpacity onPress={() => params.handleSearchInput()}>
-              <Icon name="search" size={24} />
-            </TouchableOpacity>
-          </View>
-        </View>
-      )
+      headerTitle: <ListHeaderTitle navigation={navigation} params={params} />
     };
   };
 
   componentDidMount() {
     this.props.dispatch(fetchBooks());
-    this.props.navigation.setParams({
-      search: this.state.search,
-      filter: this.props.filter,
-      handleFilter: this.handleFilter,
-      handleSearchInput: this.handleSearchInput,
-      hideSearch: this.hideSearch
-    });
   }
 
   loadMore = () => {
@@ -100,37 +34,23 @@ class List extends Component {
       this.props.dispatch(fetchBooks(newIndex));
   };
 
-  handleFilter = filter => {
-    this.props.navigation.setParams({ filter });
-    this.props.dispatch(changeFilter(filter));
-  };
-
-  handleSearchInput = () => {
-    if (!this.state.search) {
-      this.props.navigation.setParams({ search: true });
-      this.setState({ search: true });
-    } else {
-      this.props.dispatch(clearBooks());
-      this.props.dispatch(fetchBooks());
-      this.hideSearch();
-    }
-  };
-
-  hideSearch = () => {
-    if (this.state.search) {
-      this.props.navigation.setParams({ search: false });
-      this.setState({ search: false });
-    }
+  refresh = () => {
+    this.setState({ index: 0 });
+    this.props.dispatch(clearBooks());
+    this.props.dispatch(fetchBooks());
   };
 
   render() {
-    const { books } = this.props;
+    const { books, refreshing } = this.props;
+    console.log(refreshing);
     return (
       <View style={styles.mainContainer}>
         <FlatList
           horizontal={false}
           numColumns={3}
           data={books}
+          refreshing={refreshing}
+          onRefresh={() => this.refresh()}
           keyExtractor={book => book.id}
           renderItem={book => (
             <Book book={book} navigation={this.props.navigation} />
@@ -154,7 +74,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => ({
   books: state.bookReducer.books,
   maxBooks: state.bookReducer.maxBooks,
-  filter: state.bookReducer.filter
+  filter: state.bookReducer.filter,
+  refreshing: state.bookReducer.refreshing
 });
 
 export default connect(mapStateToProps)(List);

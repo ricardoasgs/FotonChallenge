@@ -1,42 +1,14 @@
 import React, { Component } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import HomeHeaderTitle from "../components/HomeHeaderTitle";
 
 class Home extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerStyle: {
       backgroundColor: "#FFE207"
     },
-    headerTitle: (
-      <View
-        style={{
-          flex: 1,
-          flexDirection: "row",
-          justifyContent: "flex-start",
-          alignItems: "center"
-        }}
-      >
-        <View
-          style={{
-            flex: 1,
-            flexDirection: "row",
-            marginLeft: 15
-          }}
-        >
-          <TouchableOpacity onPress={() => navigation.openDrawer()}>
-            <Icon name="bars" size={24} />
-          </TouchableOpacity>
-        </View>
-        <View
-          style={{
-            flex: 2,
-            flexDirection: "row"
-          }}
-        >
-          <Text style={{ fontSize: 20 }}>Design Books</Text>
-        </View>
-      </View>
-    )
+    headerTitle: <HomeHeaderTitle navigation={navigation} />
   });
 
   render() {

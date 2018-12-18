@@ -5,7 +5,6 @@ import { View, Text, StyleSheet, ScrollView } from "react-native";
 class BookText extends Component {
   render() {
     const book = this.props.book.item;
-    // console.log(book.volumeInfo);
     return (
       <View style={styles.textContainer}>
         <ScrollView style={styles.scrollContainer}>
@@ -17,16 +16,14 @@ class BookText extends Component {
 }
 const styles = StyleSheet.create({
   scrollContainer: {
-    flex: 1
+    flex: 1,
+    padding: 20
   },
   textContainer: {
     flex: 5,
     backgroundColor: "#FFF"
   },
   text: {
-    marginTop: 25,
-    marginLeft: 15,
-    marginBottom: 10,
     fontSize: 15,
     lineHeight: 32,
     color: "#757B81"

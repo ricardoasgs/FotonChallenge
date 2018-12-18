@@ -1,38 +1,22 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import BookDetails from "../components/BookDetails";
+import { View, StyleSheet } from "react-native";
+import BookDetail from "../components/BookDetail";
 import BookText from "../components/BookText";
+import DetailHeaderTitle from "../components/DetailHeaderTitle";
 
 class Detail extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerStyle: {
       backgroundColor: "#FFE207"
     },
-    headerTitle: (
-      <View
-        style={{
-          flex: 1,
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center"
-        }}
-      >
-        <Text style={{ fontSize: 20 }}>Detail</Text>
-      </View>
-    ),
-    headerRight: (
-      <View style={{ marginRight: 15 }}>
-        {/* <TouchableOpacity onPress={() => console.log("This is a button!")}>
-        <Icon name="search" size={24} />
-      </TouchableOpacity> */}
-      </View>
-    )
+    headerTitle: <DetailHeaderTitle />,
+    headerRight: <View style={{ marginRight: 15 }} />
   });
 
   render() {
     return (
       <View style={styles.mainContainer}>
-        <BookDetails navigation={this.props.navigation} />
+        <BookDetail navigation={this.props.navigation} />
         <BookText />
       </View>
     );
